@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="inherit_sale_report_base" inherit_id="sale.report_saleorder_document">
+        <!--        <xpath expr="//div[@name='signature']" position="after">-->
+        <xpath expr="//span[@name='order_note']" position="after">
+            <p>
+                <table style="width:100%">
+                    <t t-foreach="doc.order_line" t-as="line">
+                        <tr>
+                            <td>
+                                <strong>
+                                    <t t-esc="line.product_id.name"/>
+                                </strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <t t-if="doc.partner_id.country_id.code == 'IN'">
+                                    <t t-esc="line.product_id.categ_id.product_indian_sales"/>
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="line.product_id.categ_id.product_export_sale"/>
+                                </t>
+                            </td>
+                        </tr>
+                    </t>
+                </table>
+            </p>
+        </xpath>
+    </template>
+</odoo>
