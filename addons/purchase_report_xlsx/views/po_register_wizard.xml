@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_po_report_wizard_form" model="ir.ui.view">
+        <field name="name">po.report.wizard.form</field>
+        <field name="model">po.register.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Wizard">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="file_name" invisible="1"/>
+                        <field name="excel_file" readonly="1" filename="file_name"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="po_report_sheet" string="Download" type="object" icon="fa-print"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_po_register_report_wizard" model="ir.actions.act_window">
+        <field name="name">Report Wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">po.register.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_po_report_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="action_po_register_report_wizard" id="menu_wizard_purchase_summary_report"
+              name="Purchase Report" parent="account.account_account_menu" sequence="2"/>
+
+
+</odoo>
